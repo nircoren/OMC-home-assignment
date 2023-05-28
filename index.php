@@ -1,19 +1,17 @@
 <?php
 //fix data flow.
-
-include 'database.php';
+require_once 'databaseService.php';
 
 if (isset($_POST['reqObsData'])) {
-    include 'controller.php';
-    include 'databaseController.php';
     pushDataToMysql($xmlArr);
 } elseif (isset($_POST['showObs'])) {
     if (isset($_POST['exchange_types'])) {
-        include 'developers.php';
+        $fetchData = fetch_data_from_db();
     } else {
         echo "please select the exchange type.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -30,18 +28,11 @@ if (isset($_POST['reqObsData'])) {
 
 <body>
 
-    <!-- <form method="POST" action="process.php" target="responseFrame">
-        <input type="submit" value="Submit">
-    </form>
-
-    <iframe name="responseFrame" style="display: none;"></iframe> -->
-
     <div class="formsContainer">
         <div class="topActionsContainers">
             <form method="post" class="reqObsForm" id="myForm">
                 <h5>Last extraction:
                     <?php
-
                     $conn = connectToDb();
                     $sql = "SELECT Extraction_TimeStamp FROM general_data WHERE exchange_type = 'USD_to_ILS';";
                     $result = $conn->query($sql);
@@ -52,8 +43,8 @@ if (isset($_POST['reqObsData'])) {
                     $conn->close();
 
                     ?>
-                    <h5>
-                        <input type="submit" name="reqObsData" id="reqObsData" value="Get data from BOI" target="_blank" /><br />
+                </h5>
+                <input type="submit" name="reqObsData" id="reqObsData" value="Get data from BOI" target="_blank" />
             </form>
 
         </div>

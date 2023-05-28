@@ -9,10 +9,6 @@ body{
     min-width: 700px;
 }
 
-.topActionsContainers *{
-    
-}
-
 .reqObsForm{
     display: flex;
     justify-content: space-between;
