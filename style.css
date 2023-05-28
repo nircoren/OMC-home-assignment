@@ -1,0 +1,25 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-inline: auto;
+}
+
+.formsContainer{
+    min-width: 700px;
+
+}
+
+.topActionsContainers *{
+    display: inline;
+    margin-block:20px;
+}
+
+.filterBtnContainer{
+    margin-block: 20px ;
+}
+
+.row{
+    justify-content: center;
+}
+
