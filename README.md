@@ -4,7 +4,11 @@ A php and mysql project.
 the app takes data from Bank Of Israel API and presents it as an API and in a graphic format.
 It has an api that takes the data from the mysql DB and presents it in JSON format.
 
-https://github.com/Nircoren1/OMC-home-assignment/assets/114494002/58214bc3-24fd-46f9-a3dd-5c17c4adc3c0
+
+
+https://github.com/Nircoren1/OMC-home-assignment/assets/114494002/00c2330e-111f-47be-b75f-174f4aab9d2f
+
+
 
 Graphic Mode
 To see the data in graphic mode:
