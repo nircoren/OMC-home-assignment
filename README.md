@@ -23,6 +23,6 @@ https://github.com/Nircoren1/OMC-home-assignment/assets/114494002/d68e0ddd-4452-
 
 
 API
-To use the api you type in the query params in this format: http://localhost/omcapp/api/XXX_to_ILS?startperiod=XXXX-XX-XX&endperiod=XXXX-XX-XX
+To use the api you type in the query params in this format: http://localhost/omcapp/api/{CURRENCY}_to_ILS?startperiod=yyyy-mm-dd&endperiod=yyyy-mm-dd
 The api supports USD,EUR and GBP. After you type, you will get the data in JSON format.
 
