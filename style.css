@@ -7,12 +7,24 @@ body{
 
 .formsContainer{
     min-width: 700px;
-
 }
 
 .topActionsContainers *{
-    display: inline;
+    
+}
+
+.reqObsForm{
+    display: flex;
+    justify-content: space-between;
     margin-block:20px;
+}
+
+.markValuesHeader{
+    display: inline ;
+}
+
+.markValuesHeader{
+    margin-bottom: 20px;
 }
 
 .filterBtnContainer{
@@ -22,4 +34,3 @@ body{
 .row{
     justify-content: center;
 }
-

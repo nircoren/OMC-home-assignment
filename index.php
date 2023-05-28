@@ -1,13 +1,14 @@
 <?php
 //fix data flow.
-//not sure if this is good practice to share vars like that (i use vars that are declared here in the next file).
+
 include 'database.php';
 
-if (array_key_exists('reqObsData', $_POST)) {
+if (isset($_POST['reqObsData'])) {
     include 'controller.php';
+    include 'databaseController.php';
     pushDataToMysql($xmlArr);
-} elseif (array_key_exists('filterData', $_POST)) {
-    if (array_key_exists('exchange_types', $_POST)) {
+} elseif (isset($_POST['showObs'])) {
+    if (isset($_POST['exchange_types'])) {
         include 'developers.php';
     } else {
         echo "please select the exchange type.";
@@ -28,11 +29,19 @@ if (array_key_exists('reqObsData', $_POST)) {
 </head>
 
 <body>
+
+    <!-- <form method="POST" action="process.php" target="responseFrame">
+        <input type="submit" value="Submit">
+    </form>
+
+    <iframe name="responseFrame" style="display: none;"></iframe> -->
+
     <div class="formsContainer">
         <div class="topActionsContainers">
-            <form method="post" class="reqObsForm">
-                <h4>Last extraction:
+            <form method="post" class="reqObsForm" id="myForm">
+                <h5>Last extraction:
                     <?php
+
                     $conn = connectToDb();
                     $sql = "SELECT Extraction_TimeStamp FROM general_data WHERE exchange_type = 'USD_to_ILS';";
                     $result = $conn->query($sql);
@@ -43,17 +52,21 @@ if (array_key_exists('reqObsData', $_POST)) {
                     $conn->close();
 
                     ?>
-                </h4>
-                <input type="submit" name="reqObsData" id="reqObsData" value="Get data from BOI" target="_blank" /><br />
+                    <h5>
+                        <input type="submit" name="reqObsData" id="reqObsData" value="Get data from BOI" target="_blank" /><br />
             </form>
 
-            <label for="">Alert when greater than:</label>
-            <input type="number" id="">
         </div>
 
         <form method="post">
             <div>
-                <h6>Select currencies to show:</h6>
+                <h5 class="markValuesHeader">Mark values greater than:</h5>
+                <input class="markValuesHeader" type="number" name="mark_values_above" step=".001">
+            </div>
+
+
+            <div>
+                <h5>Select currencies to show:</h5>
                 <div>
                     <input type="checkbox" id="USD_to_ILS" name="exchange_types[]" value="USD_to_ILS">
                     <label for="USD_to_ILS">USD_to_ILS</label>
@@ -80,9 +93,8 @@ if (array_key_exists('reqObsData', $_POST)) {
             <input type="date" name="end_period" value="<?php echo date('Y-m-d'); ?>" min="2023-01-01" max="<?= date('Y-m-d', strtotime('now')); ?>" />
 
             <div class="filterBtnContainer" style="margin-block:20px;">
-                <input type="submit" name="filterData" id="filterData" value="show and filter" />
+                <input type="submit" name="showObs" id="showObs" value="Show obs" />
             </div>
-            <!-- <button id="button" type="" name="filterData" id="filterData" value="show and filter">Submit</button> -->
 
         </form>
     </div>
@@ -107,7 +119,7 @@ if (array_key_exists('reqObsData', $_POST)) {
                         </thead>
                         <tbody>
                             <?php
-                            if (array_key_exists('filterData', $_POST) && array_key_exists('exchange_types', $_POST) && is_array($fetchData)) {
+                            if (array_key_exists('showObs', $_POST) && array_key_exists('exchange_types', $_POST) && is_array($fetchData)) {
                                 $sn = 1;
                                 foreach ($fetchData as $data) {
                             ?>
@@ -116,7 +128,11 @@ if (array_key_exists('reqObsData', $_POST)) {
                                         <?php
                                         if (array_key_exists('exchange_types', $_POST)) {
                                             foreach ($_POST['exchange_types'] as $type) { ?>
-                                                <td><?php echo $data[$type] ?? ''; ?></td>
+                                                <td style="<?php if (is_numeric($_POST['mark_values_above']) && $data[$type] > $_POST['mark_values_above']) {
+                                                                echo 'background-color:green;';
+                                                            } ?>"> <?php echo $data[$type] ?? ''; ?></td>
+
+
                                         <?php }
                                         }
                                         ?>
@@ -125,7 +141,6 @@ if (array_key_exists('reqObsData', $_POST)) {
                                 <?php
                                     $sn++;
                                 }
-                                include 'test.php';
                             } else { ?>
                                 <tr>
                                     <td colspan="8">
