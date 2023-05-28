@@ -1,5 +1,20 @@
 <?php
 
+include 'utils.php';
+
+function pushDataToMysql($xmlArr)
+{
+    $conn = connectToDb();
+
+    foreach ($xmlArr as $xml) {
+        uploadExchangeTypeToDb($conn, $xml);
+    }
+    echo "data pulled successfully";
+
+
+    $conn->close();
+}
+
 function connectToDb()
 {
     $db_server = "localhost";
@@ -98,7 +113,7 @@ function fetch_data_from_db()
         $query = "SELECT $columnName
         FROM exchange_rate
         WHERE rate_date BETWEEN  '$start_period' AND '$end_period' ;";
-        // $query = "SELECT $columnName FROM $table_name ORDER BY rate_date DESC";
+
         $result = $conn->query($query);
         if ($result == true) {
             if ($result->num_rows > 0) {
@@ -113,19 +128,4 @@ function fetch_data_from_db()
     }
     $conn->close();
     return $msg;
-}
-
-include 'utils.php';
-
-function pushDataToMysql($xmlArr)
-{
-    $conn = connectToDb();
-
-    foreach ($xmlArr as $xml) {
-        uploadExchangeTypeToDb($conn, $xml);
-    }
-    echo "data pulled successfully";
-
-
-    $conn->close();
 }

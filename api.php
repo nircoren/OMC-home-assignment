@@ -57,5 +57,5 @@ if (validateParams()) {
     echo $jsonData;
     $conn->close();
 } else {
-    echo "Wrong query params. The correct format is \"http://localhost/website/api/XXX_to_ILS?startperiod=0000-00-00&endperiod=0000-00-00\"";
+    echo "Wrong query params. The correct format is \"http://localhost/website/api/{currency}_to_ILS?startperiod=yyyy-mm-dd&endperiod=yyyy-mm-dd\"";
 }
