@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2023 at 05:29 PM
+-- Generation Time: May 28, 2023 at 08:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `exchange_ratedb`
 --
+CREATE DATABASE IF NOT EXISTS `exchange_ratedb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `exchange_ratedb`;
 
 -- --------------------------------------------------------
 
@@ -152,9 +154,9 @@ CREATE TABLE `general_data` (
 --
 
 INSERT INTO `general_data` (`exchange_type`, `Extraction_TimeStamp`, `Counter_Currency`) VALUES
-('EUR_to_ILS', '2023-05-26 17:14:48', NULL),
-('GBP_to_ILS', '2023-05-26 17:15:10', NULL),
-('USD_to_ILS', '2023-05-26 09:54:52', NULL);
+('EUR_to_ILS', '2023-05-28 21:04:09', NULL),
+('GBP_to_ILS', '2023-05-28 21:04:09', NULL),
+('USD_to_ILS', '2023-05-28 21:04:08', NULL);
 
 --
 -- Indexes for dumped tables
@@ -165,6 +167,7 @@ INSERT INTO `general_data` (`exchange_type`, `Extraction_TimeStamp`, `Counter_Cu
 --
 ALTER TABLE `exchange_rate`
   ADD PRIMARY KEY (`rate_date`),
+  ADD UNIQUE KEY `rate_date` (`rate_date`);
 
 --
 -- Indexes for table `general_data`

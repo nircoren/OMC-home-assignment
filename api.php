@@ -1,5 +1,6 @@
 <?php
 header("Content-Type:application/json");
+include 'databaseService.php';
 
 function validateParams()
 {
@@ -22,12 +23,10 @@ function isValidExchangeType($exchange_type)
 }
 
 if (validateParams()) {
-    include 'database.php';
     $conn = connectToDb();
     $exchange_type = $_GET['exchange_type'];
     $start_period = $_GET['startperiod'];
     $end_period = $_GET['endperiod'];
-
 
     $query = "SELECT $exchange_type , rate_date
         FROM exchange_rate

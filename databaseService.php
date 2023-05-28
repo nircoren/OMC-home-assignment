@@ -14,17 +14,14 @@ function connectToDb()
             $db_pass,
             $db_name
         );
-    } catch (mysqli_sql_exception) {
-        echo "error, connected";
-    }
-    if ($conn) {
         return $conn;
-    } else {
-        echo "not connected";
+    } catch (mysqli_sql_exception) {
+        die("Connection failed: " . mysqli_connect_error());
     }
 }
 
-function uploadToDb($conn, $xml)
+//Responsible of uploading the info from the xml to the mysql db. 
+function uploadExchangeTypeToDb($conn, $xml)
 {
     $parsed_xml = new SimpleXMLElement($xml);
 
@@ -125,9 +122,10 @@ function pushDataToMysql($xmlArr)
     $conn = connectToDb();
 
     foreach ($xmlArr as $xml) {
-        uploadToDb($conn, $xml);
+        uploadExchangeTypeToDb($conn, $xml);
     }
+    echo "data pulled successfully";
+
 
     $conn->close();
-    echo "data pulled successfully";
 }

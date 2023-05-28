@@ -30,3 +30,7 @@ body{
 .row{
     justify-content: center;
 }
+
+td{
+    text-align: center;
+}

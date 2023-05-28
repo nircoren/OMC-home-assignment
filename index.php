@@ -1,5 +1,4 @@
 <?php
-//fix data flow.
 require_once 'databaseService.php';
 
 if (isset($_POST['reqObsData'])) {
@@ -11,7 +10,6 @@ if (isset($_POST['reqObsData'])) {
         echo "please select the exchange type.";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +50,7 @@ if (isset($_POST['reqObsData'])) {
         <form method="post">
             <div>
                 <h5 class="markValuesHeader">Mark values greater than:</h5>
-                <input class="markValuesHeader" type="number" name="mark_values_above" step=".001">
+                <input class="markValuesHeader" type="number" name="mark_values_condition" step=".001">
             </div>
 
 
@@ -97,11 +95,12 @@ if (isset($_POST['reqObsData'])) {
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th>Date</th>
-
+                            <tr class="text-center">
                                 <?php
-                                if (array_key_exists('exchange_types', $_POST)) {
+                                if (isset($_POST['exchange_types'])) {
+                                ?>
+                                    <th>Date</th>
+                                    <?php
                                     foreach ($_POST['exchange_types'] as $type) { ?>
                                         <th><?php echo $type ?></th>
                                 <?php }
@@ -110,27 +109,22 @@ if (isset($_POST['reqObsData'])) {
                         </thead>
                         <tbody>
                             <?php
-                            if (array_key_exists('showObs', $_POST) && array_key_exists('exchange_types', $_POST) && is_array($fetchData)) {
-                                $sn = 1;
+                            if (isset($_POST['showObs']) && isset($_POST['exchange_types'])) {
                                 foreach ($fetchData as $data) {
                             ?>
-                                    <tr>
+                                    <tr class="text-center">
                                         <td><?php echo $data['rate_date'] ?? ''; ?></td>
                                         <?php
                                         if (array_key_exists('exchange_types', $_POST)) {
                                             foreach ($_POST['exchange_types'] as $type) { ?>
-                                                <td style="<?php if (is_numeric($_POST['mark_values_above']) && $data[$type] > $_POST['mark_values_above']) {
+                                                <td style="<?php if (is_numeric($_POST['mark_values_condition']) && $data[$type] > $_POST['mark_values_condition']) {
                                                                 echo 'background-color:green;';
                                                             } ?>"> <?php echo $data[$type] ?? ''; ?></td>
-
-
                                         <?php }
                                         }
                                         ?>
-
                                     </tr>
                                 <?php
-                                    $sn++;
                                 }
                             } else { ?>
                                 <tr>
