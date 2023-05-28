@@ -14,6 +14,10 @@ To see the data in graphic mode:
 4. Choose which types of currency exchanges you want to see.
 5. Click on "Show obs" and the table will be presented.
 
+
+https://github.com/Nircoren1/OMC-home-assignment/assets/114494002/d68e0ddd-4452-4ff9-92d2-13285b313200
+
+
 API
 To use the api you type in the query params in this format: http://localhost/omcapp/api/XXX_to_ILS?startperiod=XXXX-XX-XX&endperiod=XXXX-XX-XX
 The api supports USD,EUR and GBP. After you type, you will get the data in JSON format.
