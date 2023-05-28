@@ -122,7 +122,6 @@ include 'utils.php';
 
 function pushDataToMysql($xmlArr)
 {
-    
     $conn = connectToDb();
 
     foreach ($xmlArr as $xml) {
