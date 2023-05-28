@@ -1,7 +1,7 @@
 # OMC-home-assignment
 
 A php and mysql project. 
-the app takes data from Bank Of Israel API and presents it as an API and in a graphic format.
+The app takes data from Bank Of Israel API and presents it as an API and in a graphic format.
 It has an api that takes the data from the mysql DB and presents it in JSON format.
 
 
