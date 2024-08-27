@@ -1,4 +1,4 @@
-# OMC-home-assignment
+# Php and mySql
 
 A php and mysql project. 
 The app takes data from Bank Of Israel API and presents it as an API and in a graphic format.
